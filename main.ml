@@ -1,22 +1,14 @@
-(* written on 27 ... 30 Oct 2004 *)
+(* written on 27 ... 30 Oct, 7 Nov 2004 *)
 
 open Printf
 open List
-open Origami;;
-
-let forlist a b =
-  let rec forlist_a accum a b =
-    if a > b then
-      accum
-    else
-      forlist_a (b::accum) a (b-1)
-  in
-    forlist_a [] a b;;
 
 let color_count = 64
 let color_symbol i =
-  if i < 0 || i > color_count then 
+  if i < 0 then 
     raise(Failure "color_symbol")
+  else if i > color_count then
+    '9'
   else if i = 0 then
     ' '
   else let i = i-1 in 
@@ -32,32 +24,51 @@ let print_origami_colors () =
   print_string "\" c #FFFFFF\",\n";
   iter 
     ( fun i -> printf "\"%c c #00%2x00\",\n" (color_symbol i) (0xFF-7*i/2) )
-    (forlist 1 64);;
+    (Forlist.forlist 1 64);;
 
 let print_origami ori density =
   let colors = 10 in
   printf "static char * origami_xpm[] = {\n";
   printf "\"%d %d %d 1\",\n" (2*density+1) (2*density+2) (color_count + 1);
   print_origami_colors ();
-  let (xs, ys) = density_map ori density 
+  let (xs, ys) = Origami.density_map ori density 
   in
     iter 
       ( fun dy -> 
         print_string "\"";
         iter 
-          ( fun dx -> printf "%c" (color_symbol (4*(Origami.perform ori {x=dx; y=dy}))) ) 
+          ( fun dx -> 
+            printf "%c" 
+              (color_symbol 
+                (Origami.perform ori {Origami.x=dx; Origami.y=dy})
+              ) 
+          )
           xs;
         print_string "\",\n"
       ) 
       ys;
   printf "\"%s\"};\n\n" (String.make (2*density+1) ' ');;
 
+let fetch_data () =
+  let ptpair x1 y1 x2 y2 =
+    { Origami.x=x1; Origami.y=y1 },
+    { Origami.x=x2; Origami.y=y2 }
+  in
+  let rec fetch_data_helper accum =
+    try
+      fetch_data_helper ((Scanf.scanf "(%f,%f) (%f,%f)\n" ptpair)::accum)
+    with
+      End_of_file -> accum
+  in
+  let id = Scanf.scanf "F%u\n" (fun x -> x) in
+  let data = fetch_data_helper [] in
+    (id, List.rev data);;
+
 let myorigami = 
-  Origami.fold (Origami.id 2)
-    [{x=(-.1.0); y=0.3}, {x=1.0; y=0.3};
-     {x=0.0; y=0.0}, {x=1.0; y=1.4};
-     {x=(-.1.0); y=0.0}, {x=0.8; y=1.4}];;
+  let (id, data) = fetch_data () in
+    Origami.fold (Origami.id id) data;;
 
-print_origami (Origami.fix myorigami) 300;;
+if not Sys.interactive.contents then
+  print_origami (Origami.fix myorigami) 300;;
 
-(* vim:set et ts=2 sw=2: *)
+(* vim:set et ts=2 sw=2 tw=96: *)

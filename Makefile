@@ -1,5 +1,5 @@
-VERSION = 0.4
-DIST_FILES = Makefile Makefile.dep $(ML_FILES) $(MLI_FILES)
+VERSION = 0.5
+DIST_FILES = Makefile Makefile.dep TestFile.ori $(ML_FILES) $(MLI_FILES)
 
 MLI_FILES = origami.mli
 ML_FILES  = forlist.ml origami.ml main.ml
@@ -39,14 +39,14 @@ origami: $(OBJ_FILES)
 	$(STRIP) ${@}
 
 test: origami
-	./origami
+	./origami < TestFile.ori
 
 xtest: origami
-	./origami > test.xpm
-	display test.xpm
+	./origami < TestFile.ori > TestFile.xpm && \
+	display TestFile.xpm
             
 clean:
-	rm -f origami $(CMI_FILES) $(CMO_FILES) $(CMX_FILES) $(O_FILES) test.xpm
+	rm -f origami $(CMI_FILES) $(CMO_FILES) $(CMX_FILES) $(O_FILES) TestFile.xpm
 	$(OCAMLDEP) $(ML_FILES) > Makefile.dep
 
 distclean:
