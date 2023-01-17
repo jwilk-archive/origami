@@ -27,7 +27,6 @@ let print_origami_colors () =
     (Forlist.forlist 1 64);;
 
 let print_origami ori density =
-  let colors = 10 in
   printf "static char * origami_xpm[] = {\n";
   printf "\"%d %d %d 1\",\n" (2*density+1) (2*density+2) (color_count + 1);
   print_origami_colors ();
