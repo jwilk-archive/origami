@@ -28,17 +28,17 @@ let id1 =
   let idfun =
     function ask ->
       if (
-        (ask.x>=0.0) && 
-        (ask.y>=0.0) && 
-        (ask.x<=1.0) && 
-        (ask.y<=1.0)) 
+        (ask.x>=0.0) &&
+        (ask.y>=0.0) &&
+        (ask.x<=1.0) &&
+        (ask.y<=1.0))
       then 1 else 0
   in {testfun = idfun; zeropoint = {x=0.5; y=0.5}; radius = sqrt(2.0)};;
 
 let id2 =
   let idfun =
     function ask ->
-      if (ask.x *. ask.x +. ask.y *. ask.y <= 1.0) 
+      if (ask.x *. ask.x +. ask.y *. ask.y <= 1.0)
       then 1 else 0
   in
     { testfun = idfun; zeropoint = {x=0.0; y=0.0}; radius = 1.0 };;
@@ -46,7 +46,7 @@ let id2 =
 let id3 =
   let idfun =
     function ask ->
-      if (ask.x *. ask.y <= 1.0) 
+      if (ask.x *. ask.y <= 1.0)
       then 1 else 0
   in
     { testfun = idfun; zeropoint = {x=0.0; y=0.0}; radius = 1.0 };;
@@ -66,15 +66,15 @@ let perform ori =
 (** ORIGAMI TRANSFORMATIONS: FOLDING **********************************************************)
 
 let fold1 ori (p, q) =
-  let 
+  let
     newfun ask =
-      let 
+      let
         dask = v_diff ask p and
         lv = v_diff q p
       in let
         field = v_prod lv dask
-      in if field < 0.0 
-      then 
+      in if field < 0.0
+      then
         0
       else
         let dist = 2.0 *. field /. v_length lv in
@@ -105,9 +105,9 @@ let fold id =
 let density_map ori density =
   let fdensity = float_of_int density in
   let mul = ori.radius *. 1.05 /. fdensity in
-  let 
-    us = List.map (fun n -> (float_of_int n) *. mul) (Forlist.forlist (-density) density) 
-  in let 
+  let
+    us = List.map (fun n -> (float_of_int n) *. mul) (Forlist.forlist (-density) density)
+  in let
     xs = List.map (fun x -> x +. ori.zeropoint.x) us and
     ys = List.map (fun y -> y +. ori.zeropoint.y) us
   in
@@ -117,7 +117,7 @@ let density_map ori density =
 
 let normalize ori =
   let newfun ask =
-    ori.testfun 
+    ori.testfun
       { x = ori.radius *. ask.x +. ori.zeropoint.x;
         y = ori.radius *. ask.y +. ori.zeropoint.y; }
   in
@@ -152,7 +152,7 @@ let fix ori =
       za ys in
   let rx = maxx-.minx and ry = maxy-.miny
   in
-    { testfun = ori.testfun; 
+    { testfun = ori.testfun;
       zeropoint = { x = (maxx+.minx)/.2.0; y = (maxy+.miny)/.2.0 };
       radius = sqrt(rx*.rx+.ry*.ry)/.2.0 }
 

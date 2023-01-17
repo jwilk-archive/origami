@@ -44,7 +44,7 @@ test: origami
 xtest: origami
 	./origami < TestFile.ori > TestFile.xpm && \
 	display TestFile.xpm
-            
+
 clean:
 	rm -f origami $(CMI_FILES) $(CMO_FILES) $(CMX_FILES) $(O_FILES) TestFile.xpm
 	$(OCAMLDEP) $(ML_FILES) > Makefile.dep
@@ -59,4 +59,3 @@ dist: distclean
 .PHONY: all clean distclean dist test xtest
 
 # vim:ts=4 sw=4
-
