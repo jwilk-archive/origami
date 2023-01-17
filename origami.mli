@@ -1,3 +1,7 @@
+(* Copyright © 2004-2023 Jakub Wilk <jwilk@jwilk.net>
+ * SPDX-License-Identifier: MIT
+ *)
+
 type vector = { x: float; y: float }
 type origami
 

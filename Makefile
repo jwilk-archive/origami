@@ -1,3 +1,6 @@
+# Copyright © 2004-2023 Jakub Wilk <jwilk@jwilk.net>
+# SPDX-License-Identifier: MIT
+
 VERSION = 0.5
 DIST_FILES = Makefile Makefile.dep TestFile.ori $(ML_FILES) $(MLI_FILES)
 

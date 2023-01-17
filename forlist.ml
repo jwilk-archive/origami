@@ -1,3 +1,7 @@
+(* Copyright © 2004-2023 Jakub Wilk <jwilk@jwilk.net>
+ * SPDX-License-Identifier: MIT
+ *)
+
 let forlist a b =
   let rec forlist_a accum a b =
     if a > b then

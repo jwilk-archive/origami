@@ -1,3 +1,7 @@
+(* Copyright © 2004-2023 Jakub Wilk <jwilk@jwilk.net>
+ * SPDX-License-Identifier: MIT
+ *)
+
 open Printf;;
 
 (** VECTOR ALGEBRA ****************************************************************************)
