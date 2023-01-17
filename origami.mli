@@ -8,4 +8,4 @@ val fix : origami -> origami
 val perform : origami -> vector -> int
 val density_map : origami -> int -> float list * float list
 
-(* vim:set et ts=2 sw=2 tw=96: *)
+(* vim:set et ts=2 sts=2 sw=2 tw=96: *)

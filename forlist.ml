@@ -7,4 +7,4 @@ let forlist a b =
   in
     forlist_a [] a b;;
 
-(* vim:set et ts=2 sw=2 tw=96: *)
+(* vim:set et ts=2 sts=2 sw=2 tw=96: *)

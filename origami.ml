@@ -156,4 +156,4 @@ let fix ori =
       zeropoint = { x = (maxx+.minx)/.2.0; y = (maxy+.miny)/.2.0 };
       radius = sqrt(rx*.rx+.ry*.ry)/.2.0 }
 
-(* vim:set et ts=2 sw=2 tw=96: *)
+(* vim:set et ts=2 sts=2 sw=2 tw=96: *)

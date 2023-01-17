@@ -71,4 +71,4 @@ let myorigami =
 if not Sys.interactive.contents then
   print_origami (Origami.fix myorigami) 300;;
 
-(* vim:set et ts=2 sw=2 tw=96: *)
+(* vim:set et ts=2 sts=2 sw=2 tw=96: *)
