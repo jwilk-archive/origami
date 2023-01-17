@@ -1,4 +1,14 @@
-main.cmo: forlist.cmo origami.cmi
-main.cmx: forlist.cmx origami.cmx
-origami.cmo: forlist.cmo origami.cmi
-origami.cmx: forlist.cmx origami.cmi 
+forlist.cmo :
+forlist.cmx :
+main.cmo : \
+    origami.cmi \
+    forlist.cmo
+main.cmx : \
+    origami.cmx \
+    forlist.cmx
+origami.cmo : \
+    forlist.cmo \
+    origami.cmi
+origami.cmx : \
+    forlist.cmx \
+    origami.cmi
